@@ -1,0 +1,22 @@
+@import url("fonts.css");
+
+footer {
+    font-family: 'Open Sans Condensed';
+    font-size: 23px;
+    display: flex;
+    justify-content: center;
+    margin-top: 45px;
+    padding-top: 5px;
+    border-top: 1px solid lightseagreen;
+    color: white;
+}
+
+a {
+    color: white;  
+}
+
+a:hover {
+    color: lightseagreen;
+}
+
+    

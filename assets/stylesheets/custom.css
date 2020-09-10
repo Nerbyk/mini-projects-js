@@ -1,0 +1,44 @@
+@import url("fonts.css");
+
+body {
+    background-color: #2B2B2B;
+    color: white;
+    font-family: 'Open Sans 300';
+}
+
+
+/* typography */ 
+
+h1, h2, h3, h4, h5, h6 {
+    line-height: 1.5;
+}
+
+h1 {
+    font-size: 3.5em;
+    letter-spacing: 0px;
+    margin-bottom: 30px;
+    text-align: center;
+}
+
+h2 {
+    font-size: 23px;
+    margin: 0 550px;
+    text-align: center;
+    font-weight: normal;
+    color: gray;
+}
+h3 {
+   width: 100%; 
+   text-align: center; 
+   margin: 10px 0 20px; 
+}
+h3 span { 
+    background:#fff; 
+    padding:0 10px; 
+}
+
+p {
+    margin: 0 550px;
+    font-size: 1.1em;
+    line-height: 1.7em;
+}
