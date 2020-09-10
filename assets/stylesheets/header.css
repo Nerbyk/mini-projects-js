@@ -1,14 +1,13 @@
 /* open-sans-condensed-300 - latin */
+
 @import url("fonts.css");
-
-
 header {
     display: flex;
     justify-content: center;
     font-size: 23px;
 }
 
-ul{
+ul {
     font-family: 'Open Sans Bold';
     list-style-type: none;
     margin: 0;
@@ -17,8 +16,7 @@ ul{
 }
 
 li {
-    
-    float: left; 
+    float: left;
 }
 
 li a {
@@ -29,6 +27,12 @@ li a {
     text-decoration: none;
 }
 
-a:hover{
+a.current {
+    color: lightseagreen;
+    pointer-events: none;
+    cursor: default;
+}
+
+a:hover {
     color: lightseagreen;
 }

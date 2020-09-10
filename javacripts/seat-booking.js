@@ -13,11 +13,12 @@ onlyUnique = (value, index, self) => {
 
 // Select and optons generating 
 
-let selectElement = document.createElement("select")
+const selectElement = document.createElement("select")
 selectElement.setAttribute("id", "AvailableFilms")
-let selectItem = document.getElementById("select-film").appendChild(selectElement)
+const selectItem = document.getElementById("select-film").appendChild(selectElement)
 
-let availableFilms = [
+// json parser imitation 
+const availableFilms = [
     { name: "Tenet", value: 12 },
     { name: "The Prestige", value: 7 },
     { name: "Interstellar", value: 9 },
@@ -36,26 +37,27 @@ availableFilms.forEach(
 
 // generates 5-10 occupied seats
 const seatsElement = document.getElementById("seats")
+const rows = seatsElement.querySelectorAll('.row')
 
 function generateOccupied() {
-    let seatRows = seatsElement.querySelectorAll('.row').length
+    let seatRows = rows.length
     let seatCols = seatsElement.querySelector('.row').childElementCount
     let amountOfOccupied = getRandomArbitrary(5, 10)
 
     // returns amount of seats in current case
-    amountOfSeats = () => {
+    function amountOfSeats() {
         return seatRows * seatCols
     }
 
     // return an array of integers - seats which must be occupied 
-    occupiedSeats = () => {
+    function occupiedSeats() {
         array = Array.from(Array(amountOfOccupied)).map(x => getRandomArbitrary(0, amountOfSeats()))
         return array.filter(onlyUnique);
     }
 
     // occupies seat with passed coordinates
-    toOccupie = (row, seat) => {
-        rowNumber = seatsElement.querySelectorAll('.row')
+    function toOccupie(row, seat) {
+        rowNumber = rows
         seatNumber = rowNumber[row].querySelectorAll('.seat')
         seatNumber[seat].classList.add('occupied')
     }
@@ -64,7 +66,7 @@ function generateOccupied() {
         seatNumber => {
             let row = Math.floor(seatNumber / (seatRows + 2))
             let col = Math.floor((seatNumber) - row * seatCols)
-            col > 0 ? col = Math.abs(col -= 7) : col = Math.abs(col += 7)
+            col = col > 0 ? Math.abs(col -= 7) : Math.abs(col += 7)
             toOccupie(row, col)
         }
     )
@@ -79,19 +81,21 @@ const seatCounter = document.getElementById('seat-counter')
 const count = document.getElementById('count')
 const total = document.getElementById('total')
 
-updateCounter = () => {
+function updateCounter() {
     selectedAmount = seatsElement.querySelectorAll('.seat.selected').length
     count.textContent = selectedAmount
     total.textContent = selectElement.value * selectedAmount
 }
 
-container.addEventListener('click', e => {
-    if (
-        e.target.classList.contains('seat') &&
-        !e.target.classList.contains('occupied')
-    ) {
-        e.target.classList.toggle('selected');
+function isVacantSeat(element) {
+    return element.target.classList.contains('seat') && !element.target.classList.contains('occupied')
+}
 
+container.addEventListener('click', element => {
+    if (isVacantSeat(element)) {
+        element.target.classList.toggle('selected');
         updateCounter()
     }
 });
+
+selectItem.addEventListener('change', (event) => updateCounter())
