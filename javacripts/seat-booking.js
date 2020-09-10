@@ -36,6 +36,7 @@ availableFilms.forEach(
 
 
 // generates 5-10 occupied seats
+TOINDEX = 7
 const seatsElement = document.getElementById("seats")
 const rows = seatsElement.querySelectorAll('.row')
 
@@ -61,12 +62,17 @@ function generateOccupied() {
         seatNumber = rowNumber[row].querySelectorAll('.seat')
         seatNumber[seat].classList.add('occupied')
     }
+    // makes value compatible with array indexes
+    function indexate(col) {
+
+        return col > 0 ? Math.abs(col -= TOINDEX) : Math.abs(col += TOINDEX)
+    }
 
     occupiedSeats().forEach(
         seatNumber => {
             let row = Math.floor(seatNumber / (seatRows + 2))
             let col = Math.floor((seatNumber) - row * seatCols)
-            col = col > 0 ? Math.abs(col -= 7) : Math.abs(col += 7)
+            col = indexate(col)
             toOccupie(row, col)
         }
     )
