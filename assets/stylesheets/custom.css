@@ -3,6 +3,10 @@ body {
     background-color: #2B2B2B;
     color: white;
     font-family: 'Open Sans 300';
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 100px;
+    padding-bottom: 100px;
 }
 
 
