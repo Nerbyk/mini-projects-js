@@ -27,14 +27,15 @@ class TodoStorage {
     }
 
     fromStorage() {
-        return localStorage.getItem('todos')
+        let storedData = localStorage.getItem('todos')
+        return JSON.parse(storedData)
     }
 }
 
 
 const storage = new TodoStorage
 
-function generateItems(itemText, isChecked = false) {
+function generateItems(itemText, isChecked) {
 
     let text = document.createElement("input")
     let checkbox = document.createElement("input")
@@ -53,23 +54,20 @@ function generateItems(itemText, isChecked = false) {
     return [text, checkbox]
 }
 
-function addItem(form) {
+function addItem(todoText, status = false) {
 
     let newItem = document.createElement('FORM')
 
     newItem.name = "newItem"
     todosElement.appendChild(newItem)
 
-    let [text, checkbox] = generateItems(form.value)
+    let [text, checkbox] = generateItems(todoText, status)
 
     newItem.appendChild(text)
     newItem.appendChild(checkbox)
 
     storage.newTodo(text.value, checkbox.checked)
-
-    form.value = ""
-    form.focus()
-
+    storage.toStorage()
 
     newItem.setAttribute("id", storage.id)
 
@@ -77,7 +75,11 @@ function addItem(form) {
 
 function invokeGeneration() {
     let form = document.forms["addItem"]["itemText"]
-    if (form.value != "") addItem(form);
+    if (form.value != "") {
+        addItem(form.value);
+        form.value = ""
+        form.focus()
+    }
 }
 
 function crossOut(element) {
@@ -98,5 +100,9 @@ function deleteList() {
     todosElement.childNodes.forEach(node => node.innerHTML = "")
 }
 
-console.log(storage.fromStorage())
-    // TODO: Generate Node from storage.fromStorage and append it to div todos
+function expandData(data) {
+    data.forEach(element => addItem(element.value, element.status))
+}
+
+const storageData = storage.fromStorage()
+expandData(storageData)
