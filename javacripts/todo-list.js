@@ -1,13 +1,42 @@
 const createForm = document.createElement('FORM')
+const todosElement = document.getElementById("todos")
 
-function todosElement() {
-    return document.getElementById("todos")
+
+class TodoStorage {
+    constructor() {
+        this.todos = []
+        this.id = 0
+    }
+    newTodo(value, status) {
+        this.id++;
+        let todoObj = { id: this.id, value: value, status: status };
+        this.todos.push(todoObj);
+    }
+
+    changeStatusOf(id) {
+        let elementIndex = this.todos.findIndex(element => element.id == id)
+        let cloneTodos = [...this.todos]
+        cloneTodos[elementIndex] = {...cloneTodos[elementIndex],
+            status: !cloneTodos[elementIndex].status
+        }
+        this.todos = cloneTodos
+    }
+
+    toStorage() {
+        localStorage.setItem('todos', JSON.stringify(this.todos))
+    }
+
+    fromStorage() {
+        let storedData = localStorage.getItem('todos')
+        return JSON.parse(storedData)
+    }
 }
 
 
+const storage = new TodoStorage
 
+function generateItems(itemText, isChecked) {
 
-function generateItems(itemText, isChecked = false) {
     let text = document.createElement("input")
     let checkbox = document.createElement("input")
 
@@ -25,45 +54,55 @@ function generateItems(itemText, isChecked = false) {
     return [text, checkbox]
 }
 
-function addItem(form) {
+function addItem(todoText, status = false) {
+
     let newItem = document.createElement('FORM')
-    let todos = todosElement()
 
     newItem.name = "newItem"
-    todos.appendChild(newItem)
+    todosElement.appendChild(newItem)
 
-    let [text, checkbox] = generateItems(form.value)
+    let [text, checkbox] = generateItems(todoText, status)
 
     newItem.appendChild(text)
     newItem.appendChild(checkbox)
 
-    form.value = ""
-    form.focus()
+    storage.newTodo(text.value, checkbox.checked)
+    storage.toStorage()
 
-    itemId = toStore(text.value, checkbox.checked)
-    newItem.setAttribute("id", "todoId-" + itemId)
-
-    console.log(todosElement().innerHTML)
-
+    newItem.setAttribute("id", storage.id)
 
 }
 
 function invokeGeneration() {
     let form = document.forms["addItem"]["itemText"]
-    if (form.value != "") addItem(form);
-}
-
-
-
-function crossOut(element) {
-    let textArea = element.previousSibling
-    if (!element.checked) {
-        textArea.setAttribute("class", "form todo-item")
-    } else {
-        textArea.setAttribute("class", "form todo-item crossed-out")
+    if (form.value != "") {
+        addItem(form.value);
+        form.value = ""
+        form.focus()
     }
 }
 
-function deleteList() {
-    todosElement().childNodes.forEach(node => node.innerHTML = "")
+function crossOut(element) {
+    let textArea = element.previousSibling
+    let todoId = element.parentElement.id
+    storage.changeStatusOf(todoId)
+    if (!element.checked) {
+        textArea.setAttribute("class", "form todo-item")
+
+    } else {
+        textArea.setAttribute("class", "form todo-item crossed-out")
+    }
+    storage.toStorage()
+
 }
+
+function deleteList() {
+    todosElement.childNodes.forEach(node => node.innerHTML = "")
+}
+
+function expandData(data) {
+    data.forEach(element => addItem(element.value, element.status))
+}
+
+const storageData = storage.fromStorage()
+expandData(storageData)
