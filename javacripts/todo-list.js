@@ -1,13 +1,41 @@
 const createForm = document.createElement('FORM')
+const todosElement = document.getElementById("todos")
 
-function todosElement() {
-    return document.getElementById("todos")
+
+class TodoStorage {
+    constructor() {
+        this.todos = []
+        this.id = 0
+    }
+    newTodo(value, status) {
+        this.id++;
+        let todoObj = { id: this.id, value: value, status: status };
+        this.todos.push(todoObj);
+    }
+
+    changeStatusOf(id) {
+        let elementIndex = this.todos.findIndex(element => element.id == id)
+        let cloneTodos = [...this.todos]
+        cloneTodos[elementIndex] = {...cloneTodos[elementIndex],
+            status: !cloneTodos[elementIndex].status
+        }
+        this.todos = cloneTodos
+    }
+
+    toStorage() {
+        localStorage.setItem('todos', JSON.stringify(this.todos))
+    }
+
+    fromStorage() {
+        return localStorage.getItem('todos')
+    }
 }
 
 
-
+const storage = new TodoStorage
 
 function generateItems(itemText, isChecked = false) {
+
     let text = document.createElement("input")
     let checkbox = document.createElement("input")
 
@@ -26,25 +54,24 @@ function generateItems(itemText, isChecked = false) {
 }
 
 function addItem(form) {
+
     let newItem = document.createElement('FORM')
-    let todos = todosElement()
 
     newItem.name = "newItem"
-    todos.appendChild(newItem)
+    todosElement.appendChild(newItem)
 
     let [text, checkbox] = generateItems(form.value)
 
     newItem.appendChild(text)
     newItem.appendChild(checkbox)
 
+    storage.newTodo(text.value, checkbox.checked)
+
     form.value = ""
     form.focus()
 
-    itemId = toStore(text.value, checkbox.checked)
-    newItem.setAttribute("id", "todoId-" + itemId)
 
-    console.log(todosElement().innerHTML)
-
+    newItem.setAttribute("id", storage.id)
 
 }
 
@@ -53,17 +80,23 @@ function invokeGeneration() {
     if (form.value != "") addItem(form);
 }
 
-
-
 function crossOut(element) {
     let textArea = element.previousSibling
+    let todoId = element.parentElement.id
+    storage.changeStatusOf(todoId)
     if (!element.checked) {
         textArea.setAttribute("class", "form todo-item")
+
     } else {
         textArea.setAttribute("class", "form todo-item crossed-out")
     }
+    storage.toStorage()
+
 }
 
 function deleteList() {
-    todosElement().childNodes.forEach(node => node.innerHTML = "")
+    todosElement.childNodes.forEach(node => node.innerHTML = "")
 }
+
+console.log(storage.fromStorage())
+    // TODO: Generate Node from storage.fromStorage and append it to div todos
