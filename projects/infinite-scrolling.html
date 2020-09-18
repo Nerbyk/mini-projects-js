@@ -24,8 +24,21 @@
         </div>
     </header>
 
-    <main class="project">
 
+    <main class="jumbotron">
+        <link rel="stylesheet" href="../assets/stylesheets/main.css">
+        <div class="container-proj">
+            <h1>Infinite Scrolling</h1>
+            <input type="text" id='filter' size="70" class="form" placeholder="Filter posts...">
+            <div id="posts">
+
+            </div>
+            <div class="loader">
+                <div class="circle"></div>
+                <div class="circle"></div>
+                <div class="circle"></div>
+            </div>
+        </div>
     </main>
 
     <footer>
@@ -34,7 +47,8 @@
             mini-projects-js by <a href="https://www.linkedin.com/in/nerbyk/ ">Nerbyk</a>
         </small>
     </footer>
-    <script src='../javacripts/todo-list.js'></script>
+
+    <script src='../javacripts/infiniteScrolling.js'></script>
 </body>
 
 </html>
