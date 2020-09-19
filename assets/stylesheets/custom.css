@@ -29,8 +29,9 @@ h1 {
 }
 
 h2 {
+    width: 40%;
     font-size: 23px;
-    margin: 0 550px;
+    margin: 0 auto;
     text-align: center;
     font-weight: normal;
     color: gray;
@@ -45,4 +46,32 @@ h3 {
 h3 span {
     background: #fff;
     padding: 0 10px;
+}
+
+.jumbotron {
+    padding: 30px;
+    text-align: center;
+}
+
+.container-proj {
+    width: 1170px;
+    margin: 0 auto;
+    padding: 0 15px;
+}
+
+.jumbotron .container {
+    max-width: 100%;
+}
+
+.jumbotron h1 {
+    text-align: center;
+    /* centers the heading */
+    color: #DDD;
+    font-weight: 600;
+    text-transform: uppercase;
+}
+
+.jumbotron ul {
+    text-align: center;
+    list-style-type: none;
 }
