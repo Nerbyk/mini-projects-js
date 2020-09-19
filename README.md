@@ -11,6 +11,10 @@ Here is nothing to say, just most frequent task which implements every newbie.
 
 DOM + LocalStorage + CSS
 
-## Project 3 - In process...
+## Project 3 - Infinite Scrolling 
+Blog posts loading from implementation. DataBase imitation via jsonplaceholder and fetch requests
 
+SetTimeout + Asyn/Await + CSS Loader
+
+## Link
 https://nerbyk.github.io/mini-projects-js/index.html
