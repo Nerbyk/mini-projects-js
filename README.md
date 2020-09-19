@@ -1,6 +1,7 @@
 # Description 
 Here I am impelemting mini projects using nothing but HTML5, CSS & JavaScript. No JS or CSS frameworks, no libraries, etc.
 
+
 ## Projects 1 - Seat Booking
 Seat Booking visualization which can be found in every cinema. Random generation of occupied seats and counter of selected seats based on the selected movie. 
 
@@ -17,4 +18,5 @@ Blog posts loading from implementation. DataBase imitation via jsonplaceholder a
 SetTimeout + Asyn/Await + CSS Loader
 
 ## Link
+P.s. Not optimized for mobile
 https://nerbyk.github.io/mini-projects-js/index.html
