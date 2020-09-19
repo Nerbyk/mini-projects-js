@@ -7,7 +7,7 @@ header {
     font-size: 23px;
 }
 
-ul {
+header ul {
     font-family: 'Open Sans Bold';
     list-style-type: none;
     margin: 0;
@@ -15,11 +15,11 @@ ul {
     overflow: hidden;
 }
 
-li {
+header li {
     float: left;
 }
 
-li a {
+header li a {
     display: block;
     color: white;
     text-align: center;
@@ -27,12 +27,12 @@ li a {
     text-decoration: none;
 }
 
-a.current {
+header a.current {
     color: lightseagreen;
     pointer-events: none;
     cursor: default;
 }
 
-a:hover {
+header a:hover {
     color: lightseagreen;
 }

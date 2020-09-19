@@ -15,7 +15,7 @@
             <div class="container">
                 <ul>
                     <li><a href=# class='current'>Home</a></li>
-                    <li><a href='projects/seat-booking.html'>Seat Booking</a></li>
+                    <li><a href='projects/seat-booking.html'>Seat Booking</a> </li>
                     <li><a href='projects/todo-list.html'>Todo List</a></li>
                     <li><a href='projects/infinite-scrolling.html'>Infinite Scrolling</a></li>
                 </ul>
@@ -23,35 +23,46 @@
         </div>
     </header>
 
-    <main>
+    <main class="jumbotron">
         <link rel="stylesheet" href="assets/stylesheets/main.css">
         <h1>mini-projects-js</h1>
         <h2>
             Here I tryed to impelemt mini projects using nothing but HTML5, CSS & JavaScript. No JS or CSS frameworks, no libraries, etc. Use navigation menu or grid below to see each of this mini projects.
         </h2>
-        <div class="grid-container">
-            <div class="grid-item">
-                <a href="projects/seat-booking.html">
-                    <img src="./assets/images/seats-booking-promo.png">
-                </a>
-                <br>
+
+        <ul class="index">
+            <li>
                 <a href='projects/seat-booking.html'>Seat Booking</a>
-            </div>
-            <div class="grid-item">
-                <a href=projects/todo-list.html>
-                    <img src="./assets/images/comming-soon.png">
-                </a>
-                <br>
+                <section class="info">
+                    <h5>
+                        DOM CSS
+                    </h5>
+                    <p>
+                        Seat Booking visualization which can be found in every cinema. Random generation of occupied seats and counter of selected seats based on the selected movie.
+                    </p>
+
+                </section>
+            </li>
+            <li>
                 <a href='projects/todo-list.html'>Todo List</a>
-            </div>
-            <div class="grid-item">
-                <a href='projects/infinite-scrolling.html'>
-                    <img src="./assets/images/comming-soon.png">
-                </a>
-                <br>
+                <section class="info">
+                    <h5>
+                        DOM LocalStorage
+                    </h5>
+                    <p>Here is nothing to say, just most frequent task which implements every newbie.</p>
+                </section>
+            </li>
+            <li>
                 <a href='projects/infinite-scrolling.html'>Infinite Scrolling</a>
-            </div>
-        </div>
+                <section class="info">
+                    <h5>
+                        SetTimeout<br> Asyn/Await CSS Loader
+                    </h5>
+                    <p>Blog posts loading from implementation. DataBase imitation via jsonplaceholder and fetch requests.</p>
+                </section>
+
+            </li>
+        </ul>
     </main>
 
     <footer>
