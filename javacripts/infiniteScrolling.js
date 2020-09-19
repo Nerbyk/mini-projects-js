@@ -1,5 +1,6 @@
 const postsElement = document.getElementById("posts")
 const loading = document.querySelector('.loader')
+const form = document.getElementById('filter')
 
 let limit = 5;
 let page = 1;
@@ -35,7 +36,7 @@ async function showPosts() {
 }
 
 function filterPosts(e) {
-    const ter = e.target.value.toUpperCase();
+    const term = e.target.value.toUpperCase();
     const posts = document.querySelectorAll('.post')
 
     posts.forEach(post => {
@@ -73,4 +74,4 @@ window.addEventListener('scroll', () => {
     }
 })
 
-filter.addEventListener('input', filterPosts)
+form.addEventListener('input', filterPosts)
